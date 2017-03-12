@@ -2,14 +2,35 @@
 <html>
 	<head>
 		<title>March 2017 | She Codes Web</title>
-		<link rel="stylesheet" type="text/css" href="CSS\01-GlobalStylesheet.css">
-		<link rel="stylesheet" type="text/css" href="CSS\02-HomeStylesheet.css">
-		<!-- Latest compiled and minified CSS -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		<link rel="stylesheet" type="text/css" href="CSS/Class.css">
+		<!-- JQUERY + BOOTSRAP-->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		
+		<!--script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script-->
+		<!--script src="http://code.jquery.com/jquery-3.1.1.min.js"></script-->
+		<script src="jquery-3.1.1.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-		<!-- Optional theme -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
+		<script type="text/javascript" src="./data/leaders.json"></script>
+		<script type="text/javascript" src="./data/students.json"></script>
+		
+		
+		<script>
+			//localStorage.setItem("clsData",JSON.parse(data)); 
+			//localStorage.clear();
+		</script>
+		<script>
+		
+				/*
+		//create panel element
+		var panel = document.createElement("div");
+		panel.className = "panel";                        
+		// create subject panel
+		var subjectPanel = document.createElement("div");
+		subjectPanel.className = "subjectPanel";
+		var subjectPanelText = document.createTextNode(panelData.subject);
+		subjectPanel.appendChild(subjectPanelText);*/
+		</script>
 	</head>
 	<body>
 		<!--Menu-->
@@ -28,56 +49,121 @@
 			</ul>
 		  </div>
 		</nav>
-		
+		<h1 id="headline">March 2017 Web</h1>
 		<!--Content Block-->
-		<div class="Content">
-			<div class="container">	
-				<div class="row">
-					<div class="col-md-3 col-height">
-						<div class="well">
-							<h2>Sarai Kozenyuk</h2>
-							<img class="img-responsive" src=".\images\Ladies\sarai_1.jpg" alt="Sarai">
-							<h4>052-5133311</h4>
-							<h4>saraiko@gmail.com</h4>
-						</div>
-					</div>
-					<div class="col-md-3 col-height">
-						<div class="well">
-							<h2>Mary Poppins</h2>
-							<img class="img-responsive" src=".\images\Ladies\mary-pop.jpg" alt="Mary">
-							<h4>052-55353535</h4>
-							<h4>marypop@gmail.com</h4>
-						</div>
-					</div>
-			
-					<div class="clearfix hidden-md hidden-lg"></div>
-					<div class="col-md-3 col-height">
-						<div class="well">
-							<h2>Golda</h2>
-							<img class="img-responsive" src=".\images\Ladies\golda.jpg" alt="Golda">
-							<h4>052-55353535</h4>
-							<h4>iwish@gmail.com</h4>
-						</div>
-					</div>
-					<div class="col-md-3 col-height">
-						<div class="well">
-							<h2>Princess Buttercup</h2>
-							<img class="img-responsive" src=".\images\Ladies\princess_buttercup.jpg" alt="princess_buttercup">
-							<h4>052-55353535</h4>
-							<h4>buttercup@gmail.com</h4>
-						</div>
-					</div>
-				</div>
-				
+		<div class="Content" id="pgCont">
+			<div class="container" id="tblCont">	
+				<!--dynamic tbl-->	
 			</div>
-			
 		</div>	
 		<div id="footer" >
 			<p>Sarai Kozenyuk | Mobile: 052-5133311 | mail: saraiko@gmail.com </p>
 		</div>
 		<!-- Latest compiled and minified JavaScript -->
-		<script src="https://code.jquery.com/jquery-769a62.1.1.min.js"></script>
+		<!--script src="https://code.jquery.com/jquery-769a62.1.1.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/769a62.769a62.7/js/bootstrap.min.js" integrity="sha769a6283-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous">
+		</script-->
+		<script>
+		/*	
+		var json try catch example:
+		try {
+			json = JSON.parse(input)
+		} catch (e) {
+			// invalid json input, set to null
+			json = null
+		}
+		*/
+		$(document).ready(function(){
+			var imgDir = ".\\images\\Ladies\\";
+			var ldrLst = JSON.parse(ldrData);
+			var stuLst = JSON.parse(stuData);
+			console.log("leaders" + typeof(ldrLst) +" "+ ldrLst.length);
+			console.log("students" + typeof(stuLst) +" "+ stuLst.length);
+			
+			var tbl = document.getElementById("tblCont");
+			/*
+			var x = document.createElement("P");                        // Create a <p> element
+			var t = document.createTextNode("This is a paragraph.");    // Create a text node
+			x.appendChild(t);                                           // Append the text to <p>
+										// Append <p> to <body>
+			*/
+			function ladyCrd(ladyObj){
+				lCrd  = document.createElement("div");
+				lCrd.className = "lady-pnl";
+				lCrd.id = ladyObj.id.toString();
+				
+				var hName = document.createElement("H3");
+				var txtName = document.createTextNode(ladyObj.name);    // Create a text node
+				hName.appendChild(txtName);
+				lCrd.appendChild(hName);
+				
+				var elImg = document.createElement("IMG");
+				elImg.src = imgDir + ladyObj.img;
+				elImg.className = "img-responsive";
+				elImg.alt = ladyObj.name;
+				lCrd.appendChild(elImg);
+
+				var hPhone = document.createElement("H4");
+				var txtPhone = document.createTextNode(ladyObj.phone);    // Create a text node
+				hPhone.appendChild(txtPhone); 
+				lCrd.appendChild(hPhone);
+				
+				//console.log(ladyObj.email);
+				var hEmail = document.createElement("H4");
+				var txtEmail = document.createTextNode(ladyObj.email);    // Create a text node
+				hEmail.appendChild(txtEmail); 
+				lCrd.appendChild(hEmail);
+				
+				return lCrd;
+			}
+			
+			
+			function stuTbl(){
+				var row ;// = document.createElement("div");
+				var clrFix ; //= '<div class="clearfix hidden-md hidden-lg"></div>';
+				var col;
+				
+				for(var i=0; i<stuLst.length; i++){
+					
+					if (i%4===0){	// create row
+						row = document.createElement("div");
+						tbl.appendChild(row);
+						row.className = "row";
+					}
+					if ((i%2===0)&& (i>0)){	// clear fix
+						clrFix = document.createElement("div");
+						clrFix.className = "clearfix hidden-md hidden-lg";
+						row.appendChild(clrFix);
+						console.log("clrFix");
+					}
+					
+					// create col:
+					console.log(stuLst[i].name);
+					col = document.createElement("div");	
+					col.className = "col-md-3 col-height col-sm-6 col-xs-12";
+					col.appendChild(ladyCrd(stuLst[i]));	
+					row.appendChild(col);		
+				}
+			}
+			// jQ JSON - iris example:
+			console.log('script1');
+			function getData(){
+				console.log('getData()');	
+				$.getJSON('data/cls.json', function (data) {
+							console.log('getJSON()');
+							//createPanels(data.panels[page]);
+							console.log(data);
+				 })
+				 .fail(function( jqxhr, textStatus, error ) {
+					var err = textStatus + ", " + error;
+					console.log( "Request Failed: " + err );
+				});
+				 
+			}
+			getData();
+			stuTbl();
+		});
+		
 		</script>
 	</body>
 </html>

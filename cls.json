@@ -1,0 +1,54 @@
+{
+  "leaders": [
+    {
+      "id": 1,
+      "name": "Iris Shavit",
+      "title": "leader",
+      "phone": "050-8846789",
+      "email": "iris@email.com",
+      "img": "iris.jpg"
+    },
+    {
+      "id": 2,
+      "name": "Sarai Kozenyuk",
+      "title": "leader",
+      "phone": "052-5133311",
+      "email": "saraiko@gmail.com",
+      "img": "sarai.jpg"
+    }
+  ],
+  "students": [
+    {
+      "id": 102,
+      "name": "Golda",
+      "title": "student",
+      "phone": "052-1234567",
+      "email": "Golda@gmail.com",
+      "img": "Golda.jpg"
+    },
+    {
+      "id": 103,
+      "name": "Buttercup",
+      "title": "student",
+      "phone": "052-1234567",
+      "email": "asuwhish@gmail.com",
+      "img": "princess_buttercup.jpg"
+    },
+    {
+      "id": 101,
+      "name": "Mary Poppins",
+      "title": "student",
+      "phone": "052-1234567",
+      "email": "marypop@gmail.com",
+      "img": "mary-pop.jpg"
+    },
+    {
+      "id": 104,
+      "name": "Rotem",
+      "title": "student",
+      "phone": "052-1234567",
+      "email": "rotem.abuav@gmail.com",
+      "img": "rotem_abu.jpg"
+    }
+  ]
+}

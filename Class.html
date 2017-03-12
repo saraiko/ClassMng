@@ -19,18 +19,7 @@
 			//localStorage.setItem("clsData",JSON.parse(data)); 
 			//localStorage.clear();
 		</script>
-		<script>
 		
-				/*
-		//create panel element
-		var panel = document.createElement("div");
-		panel.className = "panel";                        
-		// create subject panel
-		var subjectPanel = document.createElement("div");
-		subjectPanel.className = "subjectPanel";
-		var subjectPanelText = document.createTextNode(panelData.subject);
-		subjectPanel.appendChild(subjectPanelText);*/
-		</script>
 	</head>
 	<body>
 		<!--Menu-->
@@ -75,10 +64,9 @@
 		*/
 		$(document).ready(function(){
 			var imgDir = ".\\images\\Ladies\\";
-			var ldrLst = JSON.parse(ldrData);
-			var stuLst = JSON.parse(stuData);
-			console.log("leaders" + typeof(ldrLst) +" "+ ldrLst.length);
-			console.log("students" + typeof(stuLst) +" "+ stuLst.length);
+			var clsObj = {};
+			var ldrLst = {};//JSON.parse(ldrData);
+			var stuLst = {};//JSON.parse(stuData);
 			
 			var tbl = document.getElementById("tblCont");
 			/*
@@ -117,11 +105,26 @@
 				return lCrd;
 			}
 			
+			function ladyCol(row, ladyObj){
+				console.log(ladyObj.name);
+				var col = document.createElement("div");	
+				col.className = "col-md-3 col-height col-sm-6 col-xs-12";
+				col.appendChild(ladyCrd(ladyObj));	
+				row.appendChild(col);
+			}
+			
+			function emptyCol(row){
+				console.log('emptyCol()');
+				var col = document.createElement("div");	
+				col.className = "col-md-3 col-height col-sm-0 col-xs-0";
+				//col.appendChild(ladyCrd(ladyObj));	
+				row.appendChild(col);
+			}
 			
 			function stuTbl(){
 				var row ;// = document.createElement("div");
 				var clrFix ; //= '<div class="clearfix hidden-md hidden-lg"></div>';
-				var col;
+				//var col;
 				
 				for(var i=0; i<stuLst.length; i++){
 					
@@ -136,32 +139,63 @@
 						row.appendChild(clrFix);
 						console.log("clrFix");
 					}
-					
+					ladyCol(row, stuLst[i]);
 					// create col:
+					/*
 					console.log(stuLst[i].name);
 					col = document.createElement("div");	
 					col.className = "col-md-3 col-height col-sm-6 col-xs-12";
 					col.appendChild(ladyCrd(stuLst[i]));	
-					row.appendChild(col);		
+					row.appendChild(col);		*/
 				}
 			}
-			// jQ JSON - iris example:
+			
+			function ldrRow(){
+				var row ;// = document.createElement("div");
+				var clrFix ; //= '<div class="clearfix hidden-md hidden-lg"></div>';
+				var col;
+				
+				// create row
+				row = document.createElement("div");
+				tbl.appendChild(row);
+				row.className = "row";
+				emptyCol(row);
+				for(var i=0; i<ldrLst.length; i++){
+					ladyCol(row, ldrLst[i]);
+						
+					/*if ((i%2===0)&& (i>0)){	// clear fix
+						clrFix = document.createElement("div");
+						clrFix.className = "clearfix hidden-md hidden-lg";
+						row.appendChild(clrFix);
+						console.log("clrFix");
+					}*/	
+				}
+				emptyCol(row);
+			}
+			
+			// jQ JSON:
 			console.log('script1');
 			function getData(){
 				console.log('getData()');	
-				$.getJSON('data/cls.json', function (data) {
-							console.log('getJSON()');
+				$.getJSON('data/cls.json', function (clsObj) {
+							console.log('getJSON');
 							//createPanels(data.panels[page]);
-							console.log(data);
+							console.log(clsObj);
+		
+							ldrLst = clsObj.leaders;
+							ldrRow();
+							
+							stuLst = clsObj.students;
+							stuTbl();
 				 })
 				 .fail(function( jqxhr, textStatus, error ) {
 					var err = textStatus + ", " + error;
 					console.log( "Request Failed: " + err );
-				});
-				 
+				}); 
 			}
+			
 			getData();
-			stuTbl();
+			
 		});
 		
 		</script>
